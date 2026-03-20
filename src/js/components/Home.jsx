@@ -24,8 +24,8 @@ const Home = (props) => {
 			</div> 
 			<div className="row text-center">
 				<div clasName="col">
-					<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
-					<button type="button" class="btn btn-primary">Count Down</button>
+					<input onChange={props.onInputChange} value={props.inputValue}type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+					<button type="button" class="btn btn-primary" onClick={props.onCountDown}>Count Down</button>
 				</div>
 			</div> 
 			<div className="row text-center">
@@ -37,8 +37,8 @@ const Home = (props) => {
 			</div> 
 			<div className="row text-center">
 				<div clasName="col">
-					<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
-					<button type="button" class="btn btn-warning">Alert</button>
+					<input onChange={props.onInputChange} value={props.inputValue} type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+					<button type="button" class="btn btn-warning" onClick={props.onAlert}>Alert</button>
 				</div>
 			</div> 
 		</div>
