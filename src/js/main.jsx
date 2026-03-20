@@ -11,21 +11,59 @@ import '../styles/index.css'
 // components
 import Home from './components/Home';
 
-let contador=0
 
-setInterval(() => {
+let contador = 0;
+let myInterval = setInterval(Counter, 1000);
 
-let One = Math.floor((contador/1)%100)
-let Two = Math.floor((contador/10)%100)
-let Three = Math.floor((contador/100)%100)
+const resetCounter = () => {
+    contador = 0;
+};
 
-contador++
+const startCounter = () => {
+    // Only start if there isn't one already running to prevent "speeding up"
+    if (!myInterval) {
+        myInterval = setInterval(Counter, 1000);
+    }
+};
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Home digThree={Three} digOne={One} digTwo={Two}/>  
-  </React.StrictMode>,
-)
-}, 1000)
+const stopCounter = () => {
+    clearInterval(myInterval);
+    myInterval = null; // Clear the variable so startCounter knows it's stopped
+};
+
+function Counter() {
+    // Logic for digits
+    let One = Math.floor((contador / 1) % 10);
+    let Two = Math.floor((contador / 10) % 10);
+    let Three = Math.floor((contador / 100) % 10);
+    let Four = Math.floor((contador / 1000) % 10);
+
+    contador++;
+
+    // Note: In React 18+, you usually create the root ONCE outside the function.
+    // This is a quick fix for your current "setInterval-driven" architecture:
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+        <React.StrictMode>
+            <Home 
+                digFour={Four} 
+                digThree={Three} 
+                digTwo={Two} 
+                digOne={One} 
+                onReset={resetCounter} 
+                onStart={startCounter}
+                onStop={stopCounter}  
+            />  
+        </React.StrictMode>
+    );
+}
+
+
+
+
+
+
+
+
 
 
